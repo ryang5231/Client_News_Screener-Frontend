@@ -1293,13 +1293,33 @@ export default function Chat() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     // Optimistically update the previous bubble to show the decision was made
-    setMessages((prevMessages) =>
-      prevMessages.map((msg) =>
+    setMessages((prevMessages) => {
+      const updatedMessages = prevMessages.map((msg) =>
         msg.id === messageId && msg.meta
           ? { ...msg, meta: { ...msg.meta, decision: action } }
           : msg,
-      ),
-    );
+      );
+
+      // --- NEW LOGIC: INJECT USER MESSAGE FOR EDITS ---
+      if (action === "edit" && editInstruction) {
+        const userEditMessage: Message = {
+          id: Date.now().toString() + "-edit",
+          content: `Refine advice: ${editInstruction}`,
+          sender: "user",
+          timestamp: new Date(),
+        };
+        return [...updatedMessages, userEditMessage];
+      }
+
+      return updatedMessages;
+    });
+
+    // prevMessages.map((msg) =>
+    //     msg.id === messageId && msg.meta
+    //       ? { ...msg, meta: { ...msg.meta, decision: action } }
+    //       : msg,
+    //   ),
+    // );
 
     try {
       const formattedTime = new Date(adviceTimeStamp).toLocaleTimeString(
@@ -1358,7 +1378,6 @@ export default function Chat() {
           // Extract data similar to handleSendMessage logic
           const textData = data.text || {};
           const metaData = data.meta || {};
-          console.log(metaData);
 
           // Construct the new Assistant Message with the updated advice
           const newAdvisoryMessage: Message = {
@@ -1465,9 +1484,6 @@ export default function Chat() {
       // Handle nested structure: data.text contains the actual response
       const textData = data.text || {};
       const metaData = data.meta || {};
-
-      console.log(textData);
-      console.log(metaData);
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
