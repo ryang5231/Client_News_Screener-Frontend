@@ -37,7 +37,16 @@ import {
 } from "@radix-ui/react-accordion";
 
 function BubbleTimestamp({ timestamp }: { timestamp?: string | Date }) {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   if (!timestamp) return null;
+
+  if (!isMounted) {
+    return <div className="text-xs text-muted-foreground min-h-[16px]"></div>;
+  }
 
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
 
@@ -58,7 +67,6 @@ function NewsLookupBubble({ message }: { message: Message }) {
 
   const articles = message.meta?.articles || [];
   const entity = message.meta?.entity || "Unknown";
-
   if (articles.length === 0) {
     return (
       <Card className="max-w-[85%]">
@@ -105,7 +113,9 @@ function NewsLookupBubble({ message }: { message: Message }) {
                   No articles were published in the last{" "}
                   {message.meta?.since_days} days.
                 </h3>
-                <p>Showing the 4 most recent articles instead.</p>
+                <p>
+                  Showing the {articles.length} most recent articles instead.
+                </p>
               </div>
             )}
           </div>
@@ -292,14 +302,15 @@ function NewsLookupBubble({ message }: { message: Message }) {
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-3">
                   <span>Published on:</span>
                   <span>
-                    {new Date(article.publish_date * 1000).toLocaleDateString(
-                      "en-US",
-                      {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      },
-                    )}
+                    {new Date(
+                      !isNaN(Number(article.publish_date))
+                        ? Number(article.publish_date) * 1000
+                        : article.publish_date,
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
                   </span>
                 </div>
               )}
@@ -1455,6 +1466,9 @@ export default function Chat() {
       const textData = data.text || {};
       const metaData = data.meta || {};
 
+      console.log(textData);
+      console.log(metaData);
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         content:
@@ -1549,7 +1563,7 @@ export default function Chat() {
             </div>
             <div>
               <h1 className="text-xl font-bold">
-                UBS Wealth Advisory Assistant
+                CNS Wealth Advisory Assistant
               </h1>
               <p className="text-sm text-muted-foreground">
                 AI-powered financial insights

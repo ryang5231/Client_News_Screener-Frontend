@@ -23,7 +23,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <h1 className="text-lg font-bold px-4 py-2">UBS Client Screener</h1>
+        <h1 className="text-lg font-bold px-4 py-2">Client News Screener</h1>
       </SidebarHeader>
 
       <SidebarContent>

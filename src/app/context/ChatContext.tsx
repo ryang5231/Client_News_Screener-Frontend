@@ -21,7 +21,7 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined);
 const welcomeMessage: Message = {
   id: "1",
   content:
-    "Hello! I'm your UBS Wealth Advisory Assistant. I can help you with client intelligence, portfolio analysis, and compliance checks. How can I assist you today?",
+    "Hello! I'm your Wealth Advisory Assistant. I can help you with client intelligence, portfolio analysis, and compliance checks. How can I assist you today?",
   sender: "assistant",
   timestamp: new Date(),
   // ... other properties

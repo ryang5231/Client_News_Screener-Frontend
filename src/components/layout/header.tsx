@@ -14,7 +14,7 @@ export function Header() {
     <header className="flex items-center justify-between px-6 py-4 bg-background border-b border-border">
       <div className="flex items-center space-x-4">
         <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
-          <span className="text-primary-foreground font-bold text-sm">UBS</span>
+          <span className="text-primary-foreground font-bold text-sm">CNS</span>
         </div>
         <h1 className="text-xl font-semibold text-foreground">
           Wealth Advisory Assistant

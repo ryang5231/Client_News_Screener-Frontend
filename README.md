@@ -1,4 +1,4 @@
-# UBS Frontend
+# CNS Frontend
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -36,8 +36,8 @@ The easiest way to deploy your Next.js app is to use the Vercel Platform from th
 
 Check out the Next.js deployment documentation for more details.
 
-UBS Frontend Manual Deployment Guide (Azure App Service)
-This guide explains how to manually deploy the static frontend of the UBS Final Year Project to Azure App Service.
+CNS Frontend Manual Deployment Guide (Azure App Service)
+This guide explains how to manually deploy the static frontend of the CNS Final Year Project to Azure App Service.
 
 Prerequisites
 Node.js and npm installed locally

@@ -8,7 +8,7 @@ import { Header } from "@/components/layout/header";
 import NotificationToast from "@/components/NotificationToast";
 
 export const metadata: Metadata = {
-  title: "FYP UBS Frontend",
+  title: "CNS Frontend",
   description: "App",
 };
 
